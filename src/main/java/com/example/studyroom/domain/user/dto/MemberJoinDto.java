@@ -1,7 +1,13 @@
-package com.example.studyroom.domain.user;
+package com.example.studyroom.domain.user.dto;
 
+import com.example.studyroom.domain.user.Education;
+import com.example.studyroom.domain.user.Member;
+import com.example.studyroom.validation.MemberEmail;
+import com.example.studyroom.validation.Password;
+import com.example.studyroom.validation.Username;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -11,14 +17,11 @@ import java.time.LocalDate;
  */
 @Builder
 public record MemberJoinDto(
-        @NotBlank
-        @Pattern(regexp = "^(?=.*[a-z])(?=.*[0-9])[a-z0-9]{3,16}$")
+        @Username
         String username,
-        @NotBlank
-        @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,16}$")
+        @Password
         String password,
-        @NotBlank
-        @Email
+        @MemberEmail
         String email,
         @NotBlank
         @Pattern(regexp = "^[가-힣]{2,6}$")

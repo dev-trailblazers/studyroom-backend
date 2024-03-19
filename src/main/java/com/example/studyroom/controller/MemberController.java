@@ -25,9 +25,4 @@ public class MemberController {
     public void joinMember(@RequestBody @Valid MemberJoinDto dto){
         memberService.join(dto);
     }
-
-    @PostMapping("/login")
-    public void login(@RequestBody @Valid LoginDto dto){
-
-    }
 }

@@ -31,12 +31,15 @@ public class SecurityConfig {
                 .formLogin(auth -> auth.disable())
                 .httpBasic(auth -> auth.disable())
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/auth/*", "/member/login", "/member/join").permitAll()
+                        .requestMatchers("/auth/*", "/member/username", "/member/join").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))   //토큰 방식에서 Session은 필요없음
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(new TokenAuthenticationFilter(tokenProvider), AuthenticationFilter.class)
                 .addFilterAt(
                         new AuthenticationFilter(
-                                authenticationManager(authenticationConfiguration), tokenProvider),
+                                authenticationManager(authenticationConfiguration), tokenProvider
+                        ),
                         UsernamePasswordAuthenticationFilter.class
                 );
 

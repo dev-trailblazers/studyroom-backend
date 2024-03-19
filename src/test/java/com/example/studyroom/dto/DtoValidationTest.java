@@ -1,7 +1,7 @@
 package com.example.studyroom.dto;
 
 import com.example.studyroom.domain.auth.EmailAuthDto;
-import com.example.studyroom.domain.user.MemberJoinDto;
+import com.example.studyroom.domain.user.dto.MemberJoinDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

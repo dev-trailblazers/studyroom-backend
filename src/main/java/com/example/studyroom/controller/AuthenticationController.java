@@ -4,6 +4,7 @@ import com.example.studyroom.domain.auth.EmailAuth;
 import com.example.studyroom.domain.auth.EmailAuthDto;
 import com.example.studyroom.service.AuthService;
 import com.example.studyroom.service.EmailService;
+import com.example.studyroom.validation.MemberEmail;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class AuthenticationController {
     private final AuthService authService;
 
     @PostMapping("/new/email")
-    public void requestAuthCodeForEmail(@RequestBody String email){
+    public void requestAuthCodeForEmail(@RequestBody @MemberEmail String email){
         String code = emailService.sendAuthCode(email);
         authService.saveEmailAuth(new EmailAuth(email, code));
     }

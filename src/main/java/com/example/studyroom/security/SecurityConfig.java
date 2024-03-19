@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final TokenProvider tokenProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
@@ -34,7 +35,8 @@ public class SecurityConfig {
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))   //토큰 방식에서 Session은 필요없음
                 .addFilterAt(
-                        new AuthenticationFilter(authenticationManager(authenticationConfiguration)),
+                        new AuthenticationFilter(
+                                authenticationManager(authenticationConfiguration), tokenProvider),
                         UsernamePasswordAuthenticationFilter.class
                 );
 

@@ -17,7 +17,7 @@ public class Member extends AuditingField {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, length = 16, updatable = false)
+    @Column(length = 16, updatable = false)
     private String username;
 
     @Setter
@@ -41,13 +41,32 @@ public class Member extends AuditingField {
     @Column(length = 2083)
     private String profile_image;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 10)
+    private RoleType role;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean isLocked;
+
     @Builder
-    public Member(String username, String password, String email, String name, LocalDate birth, Education education) {
+    public Member(String username, String password, String email, String name,
+                  LocalDate birth, Education education, RoleType role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.name = name;
         this.birth = birth;
         this.education = education;
+        this.role = role;
+    }
+
+    public enum RoleType {
+        USER("ROLE_USER"), ADMIN("ROLE_ADMIN");
+
+        @Getter
+        private final String name;
+        RoleType(String name){
+            this.name = name;
+        }
     }
 }

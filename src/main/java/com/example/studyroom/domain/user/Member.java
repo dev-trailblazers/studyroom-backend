@@ -42,7 +42,7 @@ public class Member extends AuditingField {
     private String profile_image;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 20)
     private RoleType role;
 
     @Column(columnDefinition = "boolean default false")
@@ -61,12 +61,6 @@ public class Member extends AuditingField {
     }
 
     public enum RoleType {
-        USER("ROLE_USER"), ADMIN("ROLE_ADMIN");
-
-        @Getter
-        private final String name;
-        RoleType(String name){
-            this.name = name;
-        }
+        ROLE_USER, ROLE_ADMIN;
     }
 }

@@ -41,7 +41,7 @@ public record MemberJoinDto(
                 .name(name)
                 .birth(birth)
                 .education(education)
-                .role(Member.RoleType.USER)
+                .role(Member.RoleType.ROLE_USER)
                 .build();
     }
 }

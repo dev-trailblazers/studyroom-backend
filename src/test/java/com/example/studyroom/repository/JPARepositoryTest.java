@@ -41,7 +41,7 @@ public class JPARepositoryTest {
                 .name("홍길동")
                 .birth(LocalDate.of(1999,11,23))
                 .education(Education.취준생)
-                .role(Member.RoleType.USER)
+                .role(Member.RoleType.ROLE_USER)
                 .build();
         //When
         memberRepository.save(member);

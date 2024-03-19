@@ -1,6 +1,5 @@
 package com.example.studyroom.controller;
 
-import com.example.studyroom.domain.user.dto.LoginDto;
 import com.example.studyroom.domain.user.dto.MemberJoinDto;
 import com.example.studyroom.service.MemberService;
 import com.example.studyroom.validation.Username;

@@ -1,13 +1,11 @@
 package com.example.studyroom.domain.user.dto;
 
-import com.example.studyroom.domain.user.Education;
 import com.example.studyroom.domain.user.Member;
 import com.example.studyroom.validation.MemberEmail;
 import com.example.studyroom.validation.Password;
 import com.example.studyroom.validation.Username;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
-import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -30,7 +28,7 @@ public record MemberJoinDto(
         @Past
         LocalDate birth,
         @NotNull
-        Education education
+        Member.Education education
 ) implements Serializable {
 
     public Member toEntity() {

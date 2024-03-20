@@ -1,7 +1,6 @@
 package com.example.studyroom.repository;
 
 
-import com.example.studyroom.domain.user.Education;
 import com.example.studyroom.domain.user.Member;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,11 +63,11 @@ public class JPARepositoryTest {
         //Given
         Member member = memberRepository.findById(1L).get();
         //When
-        member.setEducation(Education.대학원생);
+        member.setEducation(Member.Education.대학원생);
         //Then
         memberRepository.saveAndFlush(member);
         Member afterMember = memberRepository.findById(1L).get();
-        assertThat(afterMember.getEducation()).isEqualTo(Education.대학원생);
+        assertThat(afterMember.getEducation()).isEqualTo(Member.Education.대학원생);
     }
 
     @DisplayName("회원 - 삭제")

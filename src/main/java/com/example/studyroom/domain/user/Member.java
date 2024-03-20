@@ -101,4 +101,8 @@ public class Member extends AuditingField {
     public enum RoleType {
         ROLE_USER, ROLE_ADMIN
     }
+
+    public enum Education {
+        고등학생, 대학생, 대학원생, 직장인, 취준생
+    }
 }

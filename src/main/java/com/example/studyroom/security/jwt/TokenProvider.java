@@ -1,4 +1,4 @@
-package com.example.studyroom.security;
+package com.example.studyroom.security.jwt;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;

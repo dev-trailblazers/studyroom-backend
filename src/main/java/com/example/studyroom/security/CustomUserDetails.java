@@ -4,14 +4,22 @@ import com.example.studyroom.domain.user.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 @RequiredArgsConstructor
-public class CustomUserDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails, OAuth2User {
 
     private final Member member;
+    private final Map<String, Object> oauthAttribute;
+
+    public CustomUserDetails(Member member) {
+        this.member = member;
+        this.oauthAttribute = Map.of();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -53,5 +61,18 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+
+
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return member.getUsername();
     }
 }

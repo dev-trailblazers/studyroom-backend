@@ -17,11 +17,11 @@ public class Member extends AuditingField {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 16, updatable = false)
+    @Column(length = 16, nullable = false, updatable = false)
     private String username;
 
     @Setter
-    @Column(length = 60)
+    @Column(length = 68, nullable = false)
     private String password;
 
     @Column(length = 30, updatable = false)
@@ -33,21 +33,17 @@ public class Member extends AuditingField {
     @Column(nullable = false, updatable = false)
     private LocalDate birth;
 
-    @Setter
+    @Enumerated(EnumType.STRING)
     @Column(length = 20, nullable = false)
+    private RoleType role;
+
+    @Setter
+    @Column(length = 20)
     @Enumerated(value = EnumType.STRING)
     private Education education;
 
     @Column(length = 2083)
     private String profile_image;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private RoleType role;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
-    private OauthType oauthType;
 
     @Column(columnDefinition = "boolean default false")
     private boolean isLocked;
@@ -55,7 +51,8 @@ public class Member extends AuditingField {
 
     @Builder
     public Member(String username, String password, String email, String name,
-                  LocalDate birth, Education education, RoleType role, OauthType oauthType) {
+                  LocalDate birth, Education education, RoleType role,
+                  Long modifiedBy) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -63,14 +60,45 @@ public class Member extends AuditingField {
         this.birth = birth;
         this.education = education;
         this.role = role;
-        this.oauthType = oauthType;
+        this.modifiedBy = modifiedBy;
+    }
+
+    public static Member of(String username, String password, String  email,
+                            String name, LocalDate birth,  RoleType role){
+        return Member.builder()
+                .username(username)
+                .password(password)
+                .email(email)
+                .name(name)
+                .birth(birth)
+                .role(role)
+                .build();
+    }
+
+    public static Member of(String username, String password, String name,
+                            LocalDate birth,  RoleType role){
+        return Member.builder()
+                .username(username)
+                .password(password)
+                .name(name)
+                .birth(birth)
+                .role(role)
+                .build();
+    }
+
+    public static Member of(String username, String password, String name,
+                            LocalDate birth,  RoleType role, Long modified_by){
+        return Member.builder()
+                .username(username)
+                .password(password)
+                .name(name)
+                .birth(birth)
+                .role(role)
+                .modifiedBy(modified_by)
+                .build();
     }
 
     public enum RoleType {
-        ROLE_USER, ROLE_ADMIN;
-    }
-
-    public enum OauthType {
-        NONE, KAKAO
+        ROLE_USER, ROLE_ADMIN
     }
 }

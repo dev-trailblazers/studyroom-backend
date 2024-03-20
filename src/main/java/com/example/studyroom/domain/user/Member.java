@@ -24,7 +24,7 @@ public class Member extends AuditingField {
     @Column(length = 60)
     private String password;
 
-    @Column(length = 30, nullable = false, updatable = false)
+    @Column(length = 30, updatable = false)
     private String email;
 
     @Column(length = 18, nullable = false)
@@ -45,12 +45,17 @@ public class Member extends AuditingField {
     @Column(nullable = false, length = 20)
     private RoleType role;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 10)
+    private OauthType oauthType;
+
     @Column(columnDefinition = "boolean default false")
     private boolean isLocked;
 
+
     @Builder
     public Member(String username, String password, String email, String name,
-                  LocalDate birth, Education education, RoleType role) {
+                  LocalDate birth, Education education, RoleType role, OauthType oauthType) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -58,9 +63,14 @@ public class Member extends AuditingField {
         this.birth = birth;
         this.education = education;
         this.role = role;
+        this.oauthType = oauthType;
     }
 
     public enum RoleType {
         ROLE_USER, ROLE_ADMIN;
+    }
+
+    public enum OauthType {
+        NONE, KAKAO
     }
 }

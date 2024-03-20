@@ -42,6 +42,7 @@ public class JPARepositoryTest {
                 .birth(LocalDate.of(1999,11,23))
                 .education(Education.취준생)
                 .role(Member.RoleType.ROLE_USER)
+                .oauthType(Member.OauthType.NONE)
                 .build();
         //When
         memberRepository.save(member);

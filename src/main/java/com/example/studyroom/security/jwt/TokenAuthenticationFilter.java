@@ -1,6 +1,7 @@
-package com.example.studyroom.security;
+package com.example.studyroom.security.jwt;
 
 import com.example.studyroom.domain.user.Member;
+import com.example.studyroom.security.CustomUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

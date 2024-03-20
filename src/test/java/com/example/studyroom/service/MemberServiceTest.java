@@ -2,6 +2,7 @@ package com.example.studyroom.service;
 
 
 import com.example.studyroom.domain.auth.EmailAuth;
+import com.example.studyroom.domain.user.Member;
 import com.example.studyroom.domain.user.dto.MemberJoinDto;
 import com.example.studyroom.repository.EmailAuthRedisRepository;
 import com.example.studyroom.repository.MemberRepository;
@@ -11,8 +12,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,6 +32,7 @@ class MemberServiceTest {
     @InjectMocks MemberService memberService;
     @Mock MemberRepository memberRepository;
     @Mock EmailAuthRedisRepository emailAuthRedisRepository;
+    @Mock PasswordEncoder passwordEncoder;
 
 
     @DisplayName("아이디 중복 검사 - 실패")
@@ -95,7 +99,10 @@ class MemberServiceTest {
         memberService.join(
                 MemberJoinDto.builder()
                         .username("tester1")
+                        .password("Password123@")
                         .email("test@email.com")
+                        .name("홍길동")
+                        .birth(LocalDate.of(1999,11,23))
                         .build()
         );
         then(memberRepository).should().save(any());

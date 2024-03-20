@@ -35,14 +35,13 @@ public class JPARepositoryTest {
     @Test
     void saveMember() {
         //Given
-        Member member = Member.builder()
-                .username("tester")
-                .email("test@email.com")
-                .name("홍길동")
-                .birth(LocalDate.of(1999,11,23))
-                .education(Education.취준생)
-                .role(Member.RoleType.ROLE_USER)
-                .build();
+        Member member = Member.of(
+                        "tester",
+                        "Password123@",
+                        "홍길동",
+                        LocalDate.of(1999,11,23),
+                        Member.RoleType.ROLE_USER
+                );
         //When
         memberRepository.save(member);
         //Then
@@ -81,7 +80,6 @@ public class JPARepositoryTest {
         //Then
         assertThat(member).isEmpty();
     }
-
 
 
     @EnableJpaAuditing

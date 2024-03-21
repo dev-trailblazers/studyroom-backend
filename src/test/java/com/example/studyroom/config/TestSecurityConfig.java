@@ -1,6 +1,7 @@
 package com.example.studyroom.config;
 
 import com.example.studyroom.domain.user.Member;
+import com.example.studyroom.domain.user.RoleType;
 import com.example.studyroom.repository.MemberRepository;
 import com.example.studyroom.security.SecurityConfig;
 import com.example.studyroom.security.jwt.TokenProvider;
@@ -33,7 +34,7 @@ public class TestSecurityConfig {
                                         .password("asdQWE123!@#")
                                         .name("홍길동")
                                         .birth(LocalDate.of(1999, 11, 23))
-                                        .role(Member.RoleType.ROLE_USER)
+                                        .role(RoleType.ROLE_USER)
                                         .build()
                         )
                 );

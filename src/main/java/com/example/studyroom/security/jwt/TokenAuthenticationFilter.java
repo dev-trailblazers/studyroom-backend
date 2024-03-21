@@ -1,6 +1,7 @@
 package com.example.studyroom.security.jwt;
 
 import com.example.studyroom.domain.user.Member;
+import com.example.studyroom.domain.user.RoleType;
 import com.example.studyroom.security.CustomUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -40,7 +41,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         Member member = Member.builder()
                 .username(username)
                 .password("tmp")
-                .role(Member.RoleType.valueOf(role))
+                .role(RoleType.valueOf(role))
                 .build();
 
         CustomUserDetails customUserDetails = new CustomUserDetails(member);

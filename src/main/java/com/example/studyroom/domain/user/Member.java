@@ -88,7 +88,7 @@ public class Member extends AuditingField {
     }
 
     public static Member of(String username, String password, String name,
-                            LocalDate birth,  RoleType role, Long modified_by){
+                            LocalDate birth,  RoleType role, Long modified_by) {
         return Member.builder()
                 .username(username)
                 .password(password)
@@ -97,13 +97,5 @@ public class Member extends AuditingField {
                 .role(role)
                 .modifiedBy(modified_by)
                 .build();
-    }
-
-    public enum RoleType {
-        ROLE_USER, ROLE_ADMIN
-    }
-
-    public enum Education {
-        고등학생, 대학생, 대학원생, 직장인, 취준생
     }
 }

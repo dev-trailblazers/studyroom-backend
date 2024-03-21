@@ -1,6 +1,7 @@
 package com.example.studyroom.security;
 
 import com.example.studyroom.domain.user.Member;
+import com.example.studyroom.domain.user.RoleType;
 import com.example.studyroom.repository.MemberRepository;
 import com.example.studyroom.security.jwt.TokenAuthenticationFilter;
 import com.example.studyroom.security.jwt.TokenProvider;
@@ -106,7 +107,7 @@ public class SecurityConfig {
                                                     dummyPassword,
                                                     kakaoResponse.kakaoAccount().name(),
                                                     kakaoResponse.kakaoAccount().birth(),
-                                                    Member.RoleType.ROLE_USER,
+                                                    RoleType.ROLE_USER,
                                                     1L
                                             )
                                     )

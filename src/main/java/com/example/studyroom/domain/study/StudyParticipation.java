@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Participation extends AuditingField {
+public class StudyParticipation extends AuditingField {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -22,7 +22,7 @@ public class Participation extends AuditingField {
 
 
     @Builder
-    public Participation(Long id, Member member, StudyGroup studyGroup) {
+    public StudyParticipation(Long id, Member member, StudyGroup studyGroup) {
         this.id = id;
         this.member = member;
         this.studyGroup = studyGroup;

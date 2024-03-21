@@ -1,4 +1,4 @@
-package com.example.studyroom.repository;
+package com.example.studyroom.repository.study;
 
 import com.example.studyroom.domain.study.StudyGroup;
 import org.springframework.data.jpa.repository.JpaRepository;

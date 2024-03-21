@@ -2,6 +2,7 @@ package com.example.studyroom.controller;
 
 import com.example.studyroom.domain.study.dto.StudyGroupDto;
 import com.example.studyroom.service.StudyService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,7 @@ public class StudyController {
     private final StudyService studyService;
 
     @PostMapping
-    public void studySave(@RequestBody StudyGroupDto dto){
+    public void studySave(@RequestBody @Valid StudyGroupDto dto){
         studyService.createStudyGroup(dto);
     }
 }

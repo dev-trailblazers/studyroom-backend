@@ -5,6 +5,7 @@ import com.example.studyroom.service.MemberService;
 import com.example.studyroom.validation.Username;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -14,8 +15,11 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/username")
-    public boolean validateUsername(@RequestBody @Username String username){
-        return memberService.checkDuplicateUsername(username);
+    public ResponseEntity<Boolean> validateUsername(@RequestBody @Username String username){
+        if(memberService.checkDuplicateUsername(username)){
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.badRequest().body(false);
     }
 
     @PostMapping("/join")

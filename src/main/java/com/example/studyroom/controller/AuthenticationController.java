@@ -7,6 +7,7 @@ import com.example.studyroom.service.EmailService;
 import com.example.studyroom.validation.MemberEmail;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -23,8 +24,11 @@ public class AuthenticationController {
     }
 
     @PostMapping("/email")
-    public boolean checkAuthCodeForEmail(@RequestBody @Valid EmailAuthDto dto){
-        return authService.checkEmailAuth(dto);
+    public ResponseEntity<Boolean> checkAuthCodeForEmail(@RequestBody @Valid EmailAuthDto dto){
+        if(authService.checkEmailAuth(dto)){
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.badRequest().body(false);
     }
-
+    
 }

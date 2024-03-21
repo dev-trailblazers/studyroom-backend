@@ -1,6 +1,6 @@
 package com.example.studyroom.repository;
 
-import com.example.studyroom.domain.auth.EmailAuth;
+import com.example.studyroom.domain.auth.EmailVerification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,17 +25,17 @@ public class RedisTest {
 
     @BeforeEach
     void setUp() {
-        EmailAuth emailAuth = new EmailAuth(testEmail, "123456");
-        emailAuthRedisRepository.save(emailAuth);
+        EmailVerification emailVerification = new EmailVerification(testEmail, "123456");
+        emailAuthRedisRepository.save(emailVerification);
     }
 
     @DisplayName("이메일 인증 - 생성")
     @Test
     void createEmailAuth() {
         //Given
-        EmailAuth emailAuth = new EmailAuth(testEmail, "123456");
+        EmailVerification emailVerification = new EmailVerification(testEmail, "123456");
         //When
-        emailAuthRedisRepository.save(emailAuth);
+        emailAuthRedisRepository.save(emailVerification);
         //Then
         assertThat(emailAuthRedisRepository.count()).isGreaterThan(0);
     }
@@ -44,7 +44,7 @@ public class RedisTest {
     @Test
     void findEmailAuth() {
         //Given & When
-        Optional<EmailAuth> foundEmailAuth = emailAuthRedisRepository.findById(testEmail);
+        Optional<EmailVerification> foundEmailAuth = emailAuthRedisRepository.findById(testEmail);
         //Then
         assertThat(foundEmailAuth).isPresent();
     }
@@ -53,13 +53,13 @@ public class RedisTest {
     @Test
     void updateEmailAuth() {
         //Given
-        EmailAuth foundEmailAuth = emailAuthRedisRepository.findById(testEmail).get();
+        EmailVerification foundEmailVerification = emailAuthRedisRepository.findById(testEmail).get();
         //When
-        foundEmailAuth.setStatus(true);
-        emailAuthRedisRepository.save(foundEmailAuth);
+        foundEmailVerification.setStatus(true);
+        emailAuthRedisRepository.save(foundEmailVerification);
         //Then
-        EmailAuth afterEmailAuth = emailAuthRedisRepository.findById(testEmail).get();
-        assertThat(afterEmailAuth.isStatus()).isTrue();
+        EmailVerification afterEmailVerification = emailAuthRedisRepository.findById(testEmail).get();
+        assertThat(afterEmailVerification.isStatus()).isTrue();
     }
 
     @DisplayName("이메일 인증 - 삭제")
@@ -68,7 +68,7 @@ public class RedisTest {
         //Given & When
         emailAuthRedisRepository.deleteById(testEmail);
         //Then
-        Optional<EmailAuth> emailAuth = emailAuthRedisRepository.findById(testEmail);
+        Optional<EmailVerification> emailAuth = emailAuthRedisRepository.findById(testEmail);
         assertThat(emailAuth).isEmpty();
     }
 }

@@ -1,6 +1,6 @@
 package com.example.studyroom.dto;
 
-import com.example.studyroom.domain.auth.EmailAuthDto;
+import com.example.studyroom.domain.auth.EmailVerificationDto;
 import com.example.studyroom.domain.user.dto.MemberJoinDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -162,11 +162,11 @@ public class DtoValidationTest {
     @Test
     void validate_emailAuth_email_fail() {
         //Given
-        EmailAuthDto dto = EmailAuthDto.builder()
+        EmailVerificationDto dto = EmailVerificationDto.builder()
                 .email("test.email.com")
                 .build();
         //When
-        Set<ConstraintViolation<EmailAuthDto>> validEmailViolations = validator.validateProperty(dto, "email");
+        Set<ConstraintViolation<EmailVerificationDto>> validEmailViolations = validator.validateProperty(dto, "email");
         //Then
         assertThat(validEmailViolations.size()).isEqualTo(1);
     }
@@ -175,11 +175,11 @@ public class DtoValidationTest {
     @Test
     void validate_emailAuth_email_success() {
         //Given
-        EmailAuthDto dto = EmailAuthDto.builder()
+        EmailVerificationDto dto = EmailVerificationDto.builder()
                 .email("test@email.com")
                 .build();
         //When
-        Set<ConstraintViolation<EmailAuthDto>> validEmailViolations = validator.validateProperty(dto, "email");
+        Set<ConstraintViolation<EmailVerificationDto>> validEmailViolations = validator.validateProperty(dto, "email");
         //Then
         assertThat(validEmailViolations.size()).isEqualTo(0);
     }
@@ -190,11 +190,11 @@ public class DtoValidationTest {
     @ParameterizedTest
     void validate_emailAuth_codeLength_fail(String code) {
         //Given
-        EmailAuthDto dto = EmailAuthDto.builder()
+        EmailVerificationDto dto = EmailVerificationDto.builder()
                 .code(code)
                 .build();
         //When
-        Set<ConstraintViolation<EmailAuthDto>> validEmailViolations = validator.validateProperty(dto, "code");
+        Set<ConstraintViolation<EmailVerificationDto>> validEmailViolations = validator.validateProperty(dto, "code");
         //Then
         assertThat(validEmailViolations.size()).isEqualTo(1);
     }
@@ -203,11 +203,11 @@ public class DtoValidationTest {
     @Test
     void validate_emailAuth_codeLength_success() {
         //Given
-        EmailAuthDto dto = EmailAuthDto.builder()
+        EmailVerificationDto dto = EmailVerificationDto.builder()
                 .code("123456")
                 .build();
         //When
-        Set<ConstraintViolation<EmailAuthDto>> validEmailViolations = validator.validateProperty(dto, "code");
+        Set<ConstraintViolation<EmailVerificationDto>> validEmailViolations = validator.validateProperty(dto, "code");
         //Then
         assertThat(validEmailViolations.size()).isEqualTo(0);
     }

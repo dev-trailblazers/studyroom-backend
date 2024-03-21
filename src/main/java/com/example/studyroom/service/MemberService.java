@@ -1,6 +1,6 @@
 package com.example.studyroom.service;
 
-import com.example.studyroom.domain.auth.EmailAuth;
+import com.example.studyroom.domain.auth.EmailVerification;
 import com.example.studyroom.domain.user.Member;
 import com.example.studyroom.domain.user.dto.MemberJoinDto;
 import com.example.studyroom.repository.EmailAuthRedisRepository;
@@ -28,7 +28,7 @@ public class MemberService {
         if(checkDuplicateUsername(dto.username())){
             throw new IllegalArgumentException("아이디는 중복될 수 없습니다.");
         }
-        Optional<EmailAuth> auth = emailAuthRedisRepository.findById(dto.email());
+        Optional<EmailVerification> auth = emailAuthRedisRepository.findById(dto.email());
         if(auth.isEmpty() || !auth.get().isStatus()){
             throw new IllegalArgumentException("이메일 인증 후 시도해주세요.");
         }

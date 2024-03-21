@@ -1,7 +1,7 @@
 package com.example.studyroom.service;
 
 import com.example.studyroom.domain.study.dto.StudyGroupDto;
-import com.example.studyroom.repository.study.StudyParticipationRepository;
+import com.example.studyroom.repository.study.ParticipationRepository;
 import com.example.studyroom.repository.study.StudyGroupRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class StudyServiceTest {
     @InjectMocks StudyService studyService;
     @Mock StudyGroupRepository studyGroupRepository;
     @Mock
-    StudyParticipationRepository studyParticipationRepository;
+    ParticipationRepository participationRepository;
 
 
     @DisplayName("스터디 그룹 생성 - 성공")

@@ -42,6 +42,7 @@ public class SecurityConfig {
     ) throws Exception {
         http
                 .csrf(auth -> auth.disable())
+                .cors(cors -> cors.disable())
                 .formLogin(auth -> auth.disable())
                 .httpBasic(auth -> auth.disable())
                 .oauth2Login(auth -> auth

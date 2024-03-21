@@ -50,9 +50,10 @@ public class Member extends AuditingField {
 
 
     @Builder
-    public Member(String username, String password, String email, String name,
+    public Member(Long id, String username, String password, String email, String name,
                   LocalDate birth, Education education, RoleType role,
                   Long modifiedBy) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;

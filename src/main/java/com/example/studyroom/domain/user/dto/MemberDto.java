@@ -1,6 +1,6 @@
 package com.example.studyroom.domain.user.dto;
 
-import com.example.studyroom.domain.user.Education;
+import com.example.studyroom.domain.user.Gender;
 import com.example.studyroom.domain.user.Member;
 
 import java.io.Serializable;
@@ -16,7 +16,7 @@ public record MemberDto(
         String email,
         String name,
         LocalDate birth,
-        Education education,
+        Gender gender,
         String profile_image
 ) implements Serializable {
     public static MemberDto fromEntity(Member member) {
@@ -27,7 +27,7 @@ public record MemberDto(
                 member.getEmail(),
                 member.getName(),
                 member.getBirth(),
-                member.getEducation(),
+                member.getGender(),
                 member.getProfile_image()
         );
     }

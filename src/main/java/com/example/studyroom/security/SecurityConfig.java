@@ -6,9 +6,7 @@ import com.example.studyroom.repository.MemberRepository;
 import com.example.studyroom.security.jwt.TokenAuthenticationFilter;
 import com.example.studyroom.security.jwt.TokenProvider;
 import com.example.studyroom.security.oauth.KakaoOAuth2Response;
-import com.example.studyroom.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,7 +25,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 
@@ -107,6 +104,7 @@ public class SecurityConfig {
                                                     dummyPassword,
                                                     kakaoResponse.kakaoAccount().name(),
                                                     kakaoResponse.kakaoAccount().birth(),
+                                                    kakaoResponse.kakaoAccount().gender(),
                                                     RoleType.ROLE_USER,
                                                     1L
                                             )

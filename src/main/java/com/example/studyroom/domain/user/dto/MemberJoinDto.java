@@ -1,6 +1,6 @@
 package com.example.studyroom.domain.user.dto;
 
-import com.example.studyroom.domain.user.Education;
+import com.example.studyroom.domain.user.Gender;
 import com.example.studyroom.domain.user.Member;
 import com.example.studyroom.domain.user.RoleType;
 import com.example.studyroom.validation.MemberEmail;
@@ -30,7 +30,7 @@ public record MemberJoinDto(
         @Past
         LocalDate birth,
         @NotNull
-        Education education
+        Gender gender
 ) implements Serializable {
 
     public Member toEntity() {
@@ -40,7 +40,7 @@ public record MemberJoinDto(
                 .email(email)
                 .name(name)
                 .birth(birth)
-                .education(education)
+                .gender(gender)
                 .role(RoleType.ROLE_USER)
                 .build();
     }

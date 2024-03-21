@@ -1,2 +1,2 @@
-INSERT INTO Member (username, password, email, name, birth, education, role, created_at, modified_at, modified_by)
-VALUES ('tester1', '{noop}Password123@', 'test@email.com', '홍길동', '1999-11-23', '취준생', 'ROLE_USER', '2024-03-19', '2024-03-19', 1);
+INSERT INTO Member (username, password, email, name, birth, gender, profile_image, role, is_locked, created_at, modified_at, modified_by)
+VALUES ('tester1', '{noop}Password123@', 'test@email.com', '홍길동', '1999-11-23', 'M', '주소', 'ROLE_USER', false, current_timestamp, current_timestamp, 1);

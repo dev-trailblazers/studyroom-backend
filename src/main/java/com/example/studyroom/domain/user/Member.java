@@ -34,24 +34,25 @@ public class Member extends AuditingField {
     private LocalDate birth;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 1, nullable = false, updatable = false)
+    private Gender gender;
+
+    @Setter
+    @Column(length = 2083)
+    private String profile_image;
+
+    @Enumerated(EnumType.STRING)
     @Column(length = 20, nullable = false)
     private RoleType role;
 
     @Setter
-    @Column(length = 20)
-    @Enumerated(value = EnumType.STRING)
-    private Education education;
-
-    @Column(length = 2083)
-    private String profile_image;
-
-    @Column(columnDefinition = "boolean default false")
+    @Column(columnDefinition = "boolean not null default false")
     private boolean isLocked;
 
 
     @Builder
     public Member(Long id, String username, String password, String email, String name,
-                  LocalDate birth, Education education, RoleType role,
+                  LocalDate birth,  Gender gender, RoleType role,
                   Long modifiedBy) {
         this.id = id;
         this.username = username;
@@ -59,41 +60,44 @@ public class Member extends AuditingField {
         this.email = email;
         this.name = name;
         this.birth = birth;
-        this.education = education;
+        this.gender = gender;
         this.role = role;
         this.modifiedBy = modifiedBy;
     }
 
     public static Member of(String username, String password, String  email,
-                            String name, LocalDate birth,  RoleType role){
+                            String name, LocalDate birth, Gender gender, RoleType role){
         return Member.builder()
                 .username(username)
                 .password(password)
                 .email(email)
                 .name(name)
                 .birth(birth)
+                .gender(gender)
                 .role(role)
                 .build();
     }
 
     public static Member of(String username, String password, String name,
-                            LocalDate birth,  RoleType role){
+                            LocalDate birth,  Gender gender, RoleType role){
         return Member.builder()
                 .username(username)
                 .password(password)
                 .name(name)
                 .birth(birth)
+                .gender(gender)
                 .role(role)
                 .build();
     }
 
     public static Member of(String username, String password, String name,
-                            LocalDate birth,  RoleType role, Long modified_by) {
+                            LocalDate birth, Gender gender, RoleType role, Long modified_by) {
         return Member.builder()
                 .username(username)
                 .password(password)
                 .name(name)
                 .birth(birth)
+                .gender(gender)
                 .role(role)
                 .modifiedBy(modified_by)
                 .build();

@@ -1,5 +1,6 @@
 package com.example.studyroom.config;
 
+import com.example.studyroom.domain.user.Gender;
 import com.example.studyroom.domain.user.Member;
 import com.example.studyroom.domain.user.RoleType;
 import com.example.studyroom.repository.MemberRepository;
@@ -34,6 +35,7 @@ public class TestSecurityConfig {
                                         .password("asdQWE123!@#")
                                         .name("홍길동")
                                         .birth(LocalDate.of(1999, 11, 23))
+                                        .gender(Gender.M)
                                         .role(RoleType.ROLE_USER)
                                         .build()
                         )

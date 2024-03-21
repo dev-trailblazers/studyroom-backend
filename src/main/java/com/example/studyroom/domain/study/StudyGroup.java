@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
@@ -14,17 +15,23 @@ import java.time.LocalDate;
 public class StudyGroup extends AuditingField {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 60,nullable = false)
     private String name;
+
     @Column(length = 30, nullable = false)
     private String type;
 
     @Column(nullable = false)
     private LocalDate startDate;
+
     @Column(nullable = false)
     private LocalDate endDate;
+
     @Column(nullable = false)
     private byte headcount;
+
+    @Setter
     @Column(columnDefinition = "boolean not null default false")
     private boolean isRecruit;
 

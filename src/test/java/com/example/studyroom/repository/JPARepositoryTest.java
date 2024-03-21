@@ -1,7 +1,7 @@
 package com.example.studyroom.repository;
 
 
-import com.example.studyroom.domain.user.Education;
+import com.example.studyroom.domain.user.Gender;
 import com.example.studyroom.domain.user.Member;
 import com.example.studyroom.domain.user.RoleType;
 import org.junit.jupiter.api.DisplayName;
@@ -41,6 +41,7 @@ public class JPARepositoryTest {
                         "Password123@",
                         "홍길동",
                         LocalDate.of(1999,11,23),
+                        Gender.M,
                         RoleType.ROLE_USER
                 );
         //When
@@ -65,11 +66,11 @@ public class JPARepositoryTest {
         //Given
         Member member = memberRepository.findById(1L).get();
         //When
-        member.setEducation(Education.대학원생);
+        member.setProfile_image("new profile");
         //Then
         memberRepository.saveAndFlush(member);
         Member afterMember = memberRepository.findById(1L).get();
-        assertThat(afterMember.getEducation()).isEqualTo(Education.대학원생);
+        assertThat(afterMember.getProfile_image()).isEqualTo("new profile");
     }
 
     @DisplayName("회원 - 삭제")

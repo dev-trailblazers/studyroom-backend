@@ -1,7 +1,7 @@
 package com.example.studyroom.service;
 
-import com.example.studyroom.domain.auth.EmailAuth;
-import com.example.studyroom.domain.auth.EmailAuthDto;
+import com.example.studyroom.domain.auth.EmailVerification;
+import com.example.studyroom.domain.auth.EmailVerificationDto;
 import com.example.studyroom.repository.EmailAuthRedisRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ class AuthServiceTest {
     @Test
     void check_authCode_null() {
         given(emailAuthRedisRepository.findById(anyString())).willReturn(Optional.empty());
-        assertThatThrownBy(() -> authService.checkEmailAuth(new EmailAuthDto("test@email.com", "123456")))
+        assertThatThrownBy(() -> authService.checkVerificationCodeForEmail(new EmailVerificationDto("test@email.com", "123456")))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -35,9 +35,9 @@ class AuthServiceTest {
     @Test
     void check_authCode_mismatch() {
         given(emailAuthRedisRepository.findById(anyString())).willReturn(
-                Optional.of(new EmailAuth("test@email.com", "654321"))
+                Optional.of(new EmailVerification("test@email.com", "654321"))
         );
-        boolean result = authService.checkEmailAuth(new EmailAuthDto("test@email.com", "123456"));
+        boolean result = authService.checkVerificationCodeForEmail(new EmailVerificationDto("test@email.com", "123456"));
         assertThat(result).isFalse();
     }
 
@@ -45,9 +45,9 @@ class AuthServiceTest {
     @Test
     void check_authCode_success() {
         given(emailAuthRedisRepository.findById(anyString())).willReturn(
-                Optional.of(new EmailAuth("test@email.com", "123456"))
+                Optional.of(new EmailVerification("test@email.com", "123456"))
         );
-        boolean result = authService.checkEmailAuth(new EmailAuthDto("test@email.com", "123456"));
+        boolean result = authService.checkVerificationCodeForEmail(new EmailVerificationDto("test@email.com", "123456"));
         assertThat(result).isTrue();
     }
 }

@@ -1,7 +1,7 @@
 package com.example.studyroom.controller;
 
-import com.example.studyroom.domain.auth.EmailAuth;
-import com.example.studyroom.domain.auth.EmailAuthDto;
+import com.example.studyroom.domain.auth.EmailVerification;
+import com.example.studyroom.domain.auth.EmailVerificationDto;
 import com.example.studyroom.service.AuthService;
 import com.example.studyroom.service.EmailService;
 import com.example.studyroom.validation.MemberEmail;
@@ -20,12 +20,13 @@ public class AuthenticationController {
     @PostMapping("/new/email")
     public void requestAuthCodeForEmail(@RequestBody @MemberEmail String email){
         String code = emailService.sendAuthCode(email);
-        authService.saveEmailAuth(new EmailAuth(email, code));
+        authService.saveEmailAuth(new EmailVerification(email, code));
     }
 
+    // TODO: 3/21/24 checkVerificationCode로 변경
     @PostMapping("/email")
-    public ResponseEntity<Boolean> checkAuthCodeForEmail(@RequestBody @Valid EmailAuthDto dto){
-        if(authService.checkEmailAuth(dto)){
+    public ResponseEntity<Boolean> checkVerificationCodeForEmail(@RequestBody @Valid EmailVerificationDto dto){
+        if(authService.checkVerificationCodeForEmail(dto)){
             return ResponseEntity.ok(true);
         }
         return ResponseEntity.badRequest().body(false);

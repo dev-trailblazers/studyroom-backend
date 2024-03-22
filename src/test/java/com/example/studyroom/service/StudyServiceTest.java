@@ -1,5 +1,6 @@
 package com.example.studyroom.service;
 
+import com.example.studyroom.domain.study.dto.RequestStudyGroupDto;
 import com.example.studyroom.domain.study.dto.StudyGroupDto;
 import com.example.studyroom.repository.study.ParticipationRepository;
 import com.example.studyroom.repository.study.StudyGroupRepository;
@@ -11,6 +12,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.then;
 
 
 @DisplayName("비즈니스 로직 - 스터디")
@@ -26,7 +30,7 @@ class StudyServiceTest {
     @Test
     void studyGroup_create_success() {
         //Given
-        StudyGroupDto dto = StudyGroupDto.of(
+        RequestStudyGroupDto dto = RequestStudyGroupDto.of(
                 "스터디그룹1",
                 "영어",
                 LocalDate.of(2024, 3, 10),
@@ -35,6 +39,8 @@ class StudyServiceTest {
                 false
         );
         //When
-        studyService.createStudyGroup(dto);
+        studyService.createStudyGroup(dto, 1L);
+        then(studyGroupRepository).should().save(any());
+        then(participationRepository).should().save(any());
     }
 }

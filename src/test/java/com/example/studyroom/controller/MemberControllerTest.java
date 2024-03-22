@@ -35,7 +35,7 @@ class MemberControllerTest {
     @DisplayName("[POST] 아이디 중복 검사 - 성공")
     @Test
     void duplicateCheck_username_200() throws Exception {
-        given(memberService.checkDuplicateUsername(anyString())).willReturn(true);
+        given(memberService.checkDuplicateUsername(anyString())).willReturn(false);
         mvc.perform(post("/member/username")
                         .content("tester1"))
                 .andExpect(status().isOk())
@@ -45,7 +45,7 @@ class MemberControllerTest {
     @DisplayName("[POST] 아이디 중복 검사 - 실패")
     @Test
     void duplicateCheck_username_400() throws Exception {
-        given(memberService.checkDuplicateUsername(anyString())).willReturn(false);
+        given(memberService.checkDuplicateUsername(anyString())).willReturn(true);
         mvc.perform(post("/member/username")
                         .content("tester1"))
                 .andExpect(status().isBadRequest())

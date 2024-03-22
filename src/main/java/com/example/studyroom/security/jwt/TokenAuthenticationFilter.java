@@ -24,7 +24,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         String authorization = request.getHeader("Authorization");
 
         if (authorization == null || !authorization.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);    //체이닝된 필터를 doFilter를 호출해서 다음 필터에 전달 후 종료시킨다.
+            filterChain.doFilter(request, response);
             return;
         }
 
@@ -35,18 +35,21 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
+        Long id = tokenProvider.getId(token);
         String username = tokenProvider.getUsername(token);
         String role = tokenProvider.getRole(token);
 
         Member member = Member.builder()
+                .id(id)
                 .username(username)
                 .password("tmp")
                 .role(RoleType.valueOf(role))
                 .build();
-
         CustomUserDetails customUserDetails = new CustomUserDetails(member);
 
-        Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
+        Authentication authToken = new UsernamePasswordAuthenticationToken(
+                customUserDetails, null, customUserDetails.getAuthorities()
+        );
 
         SecurityContextHolder.getContext().setAuthentication(authToken);
 

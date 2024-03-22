@@ -9,11 +9,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.util.Collection;
-import java.util.Iterator;
 
 @RequiredArgsConstructor
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -41,15 +38,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             FilterChain chain,
                                             Authentication authResult) {
         CustomUserDetails customUserDetails = (CustomUserDetails) authResult.getPrincipal();
-        String username = customUserDetails.getUsername();
-
-        Collection<? extends GrantedAuthority> authorities = authResult.getAuthorities();
-        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
-        GrantedAuthority auth = iterator.next();
-
-        String role = auth.getAuthority();
-
-        String token = tokenProvider.generateToken(username, role, 60*60*10L);
+        String token = tokenProvider.generateToken(customUserDetails);
 
         response.addHeader("Authorization", "Bearer " + token);
     }

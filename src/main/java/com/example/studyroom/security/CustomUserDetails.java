@@ -1,6 +1,8 @@
 package com.example.studyroom.security;
 
 import com.example.studyroom.domain.user.Member;
+import com.example.studyroom.domain.user.RoleType;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +15,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails, OAuth2User {
 
-    private final Member member;
+    @Getter private final Member member;
     private final Map<String, Object> oauthAttribute;
 
     public CustomUserDetails(Member member) {
@@ -31,6 +33,10 @@ public class CustomUserDetails implements UserDetails, OAuth2User {
 
     public Long getId() {
         return member.getId();
+    }
+
+    public RoleType getRole(){
+        return member.getRole();
     }
 
     @Override

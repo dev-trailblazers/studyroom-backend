@@ -3,6 +3,7 @@ package com.example.studyroom.service;
 import com.example.studyroom.domain.study.Participant;
 import com.example.studyroom.domain.study.ParticipantRole;
 import com.example.studyroom.domain.study.StudyGroup;
+import com.example.studyroom.domain.study.dto.RequestStudyGroupDto;
 import com.example.studyroom.domain.study.dto.StudyGroupDto;
 import com.example.studyroom.domain.user.Member;
 import com.example.studyroom.repository.study.StudyApplicationRepository;
@@ -22,8 +23,9 @@ public class StudyService {
     private final ParticipationRepository participationRepository;
     private final StudyApplicationRepository studyApplicationRepository;
 
-    public void createStudyGroup(StudyGroupDto dto, Long memberId){
-        StudyGroup studyGroup = studyGroupRepository.save(StudyGroupDto.toEntity(dto));
+    public StudyGroupDto createStudyGroup(RequestStudyGroupDto dto, Long memberId){
+        StudyGroup studyGroup = studyGroupRepository.save(RequestStudyGroupDto.toEntity(dto));
+
         Participant participant = Participant.builder()
                 .member(Member.builder()
                         .id(memberId)
@@ -33,6 +35,8 @@ public class StudyService {
                 .role(ParticipantRole.LEADER)
                 .build();
         participationRepository.save(participant);
+
+        return StudyGroupDto.fromEntity(studyGroup);
     }
 
     public void recruitStudy(Long studyId, CustomUserDetails user) {

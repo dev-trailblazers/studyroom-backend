@@ -11,32 +11,23 @@ import java.time.LocalDate;
  * DTO for {@link com.example.studyroom.domain.study.StudyGroup}
  */
 public record StudyGroupDto(
-        @NotBlank String name,
-        @NotBlank String type,
-        @NotNull LocalDate startDate,
-        @NotNull LocalDate endDate,
-        @NotNull byte headcount,
-        @NotNull boolean isRecruit
+        Long id,
+        String name,
+        String type,
+        LocalDate startDate,
+        LocalDate endDate,
+        byte headcount,
+        boolean isRecruit
 ) implements Serializable {
-    public static StudyGroup toEntity(StudyGroupDto dto){
-        return StudyGroup.builder()
-                .name(dto.name)
-                .type(dto.type)
-                .startDate(dto.startDate)
-                .endDate(dto.endDate)
-                .headcount(dto.headcount)
-                .isRecruit(dto.isRecruit)
-                .build();
-    }
 
-
-    public static StudyGroupDto of(String name, String type, LocalDate startDate,
+    public static StudyGroupDto of(Long id, String name, String type, LocalDate startDate,
                                    LocalDate endDate, byte headcount, boolean isRecruit){
-        return new StudyGroupDto(name, type, startDate, endDate, headcount, isRecruit);
+        return new StudyGroupDto(id, name, type, startDate, endDate, headcount, isRecruit);
     }
 
     public static StudyGroupDto fromEntity(StudyGroup studyGroup){
         return StudyGroupDto.of(
+                studyGroup.getId(),
                 studyGroup.getName(),
                 studyGroup.getType(),
                 studyGroup.getStartDate(),

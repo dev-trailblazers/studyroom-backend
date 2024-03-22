@@ -1,5 +1,6 @@
 package com.example.studyroom.service;
 
+import com.example.studyroom.domain.study.dto.RequestStudyGroupDto;
 import com.example.studyroom.domain.study.dto.StudyGroupDto;
 import com.example.studyroom.repository.study.ParticipationRepository;
 import com.example.studyroom.repository.study.StudyGroupRepository;
@@ -29,7 +30,7 @@ class StudyServiceTest {
     @Test
     void studyGroup_create_success() {
         //Given
-        StudyGroupDto dto = StudyGroupDto.of(
+        RequestStudyGroupDto dto = RequestStudyGroupDto.of(
                 "스터디그룹1",
                 "영어",
                 LocalDate.of(2024, 3, 10),

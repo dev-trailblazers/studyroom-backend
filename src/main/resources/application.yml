@@ -1,9 +1,9 @@
 logging:
   level:
-    com.com.growth.community: debug
-    org.springframework.security: debug
+    com.com.growth.community: trace
+    org.springframework.security: trace
     org.hibernate.type.descriptor.sql.BasicBinder: trace
-    org.springframework.web.servlet: debug
+    org.springframework.web.servlet: trace
 
 spring:
   datasource:
@@ -13,7 +13,7 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
       dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
     open-in-view: false

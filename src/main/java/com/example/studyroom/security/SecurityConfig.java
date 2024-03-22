@@ -6,6 +6,7 @@ import com.example.studyroom.repository.MemberRepository;
 import com.example.studyroom.security.jwt.TokenAuthenticationFilter;
 import com.example.studyroom.security.jwt.TokenProvider;
 import com.example.studyroom.security.oauth.KakaoOAuth2Response;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,12 +54,15 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling((exceptionHandling) -> exceptionHandling             //예외 발생 시 리다이렉션 없이 응답
+                        .authenticationEntryPoint((request, response, authException) ->
+                                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized"))
+                )
                 .addFilterBefore(new TokenAuthenticationFilter(tokenProvider), AuthenticationFilter.class)
                 .addFilterAt(
                         new AuthenticationFilter(
                                 authenticationManager(authenticationConfiguration), tokenProvider
-                        ),
-                        UsernamePasswordAuthenticationFilter.class
+                        ), UsernamePasswordAuthenticationFilter.class
                 );
 
         return http.build();

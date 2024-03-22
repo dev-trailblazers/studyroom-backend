@@ -12,6 +12,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.then;
+
 
 @DisplayName("비즈니스 로직 - 스터디")
 @ExtendWith(MockitoExtension.class)
@@ -36,5 +39,7 @@ class StudyServiceTest {
         );
         //When
         studyService.createStudyGroup(dto, 1L);
+        then(studyGroupRepository).should().save(any());
+        then(participationRepository).should().save(any());
     }
 }

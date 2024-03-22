@@ -35,6 +35,6 @@ class StudyServiceTest {
                 false
         );
         //When
-        studyService.createStudyGroup(dto);
+        studyService.createStudyGroup(dto, 1L);
     }
 }

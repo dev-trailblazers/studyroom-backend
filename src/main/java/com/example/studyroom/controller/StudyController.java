@@ -15,8 +15,8 @@ public class StudyController {
     private final StudyService studyService;
 
     @PostMapping("/new")
-    public void studySave(@RequestBody @Valid StudyGroupDto dto){
-        studyService.createStudyGroup(dto);
+    public void studySave(@RequestBody @Valid StudyGroupDto dto,  @AuthenticationPrincipal CustomUserDetails user){
+        studyService.createStudyGroup(dto, user.getId());
     }
 
     @PostMapping("/recruitment/{studyId}")

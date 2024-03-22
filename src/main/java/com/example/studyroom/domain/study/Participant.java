@@ -26,9 +26,10 @@ public class Participant extends AuditingField {
 
 
     @Builder
-    public Participant(Long id, Member member, StudyGroup studyGroup) {
+    public Participant(Long id, Member member, StudyGroup studyGroup, ParticipantRole role) {
         this.id = id;
         this.member = member;
         this.studyGroup = studyGroup;
+        this.role = role;
     }
 }

@@ -17,9 +17,9 @@ public class MemberController {
     @PostMapping("/username")
     public ResponseEntity<Boolean> validateUsername(@RequestBody @Username String username){
         if(memberService.checkDuplicateUsername(username)){
-            return ResponseEntity.ok(true);
+            return ResponseEntity.badRequest().body(true);
         }
-        return ResponseEntity.badRequest().body(false);
+        return ResponseEntity.ok(false);
     }
 
     @PostMapping("/join")

@@ -10,14 +10,14 @@ import org.springframework.data.redis.core.RedisHash;
 @Getter
 @NoArgsConstructor
 @RedisHash(value = "email", timeToLive = 60*5)
-public class EmailAuth {
+public class EmailVerification {
     @Id
     private String email;
     private String code;
     @Setter
     private boolean status = false;
 
-    public EmailAuth(String email, String code) {
+    public EmailVerification(String email, String code) {
         this.email = email;
         this.code = code;
     }

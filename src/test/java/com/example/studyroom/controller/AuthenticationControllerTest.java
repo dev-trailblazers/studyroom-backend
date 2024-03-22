@@ -1,7 +1,7 @@
 package com.example.studyroom.controller;
 
 import com.example.studyroom.config.TestSecurityConfig;
-import com.example.studyroom.domain.auth.EmailAuthDto;
+import com.example.studyroom.domain.auth.EmailVerificationDto;
 import com.example.studyroom.service.AuthService;
 import com.example.studyroom.service.EmailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,20 +39,20 @@ class AuthenticationControllerTest {
     @DisplayName("이메일 인증 - 성공")
     @Test
     void check_emailAuth_success() throws Exception {
-        given(authService.checkEmailAuth(any())).willReturn(true);
+        given(authService.checkVerificationCodeForEmail(any())).willReturn(true);
         mvc.perform(post("/auth/email")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(mapper.writeValueAsString(new EmailAuthDto("test@email.com", "123456"))))
+                .content(mapper.writeValueAsString(new EmailVerificationDto("test@email.com", "123456"))))
                 .andExpect(status().isOk());
     }
 
     @DisplayName("이메일 인증 - 실패")
     @Test
     void check_emailAuth_fail() throws Exception {
-        given(authService.checkEmailAuth(any())).willReturn(false);
+        given(authService.checkVerificationCodeForEmail(any())).willReturn(false);
         mvc.perform(post("/auth/email")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(new EmailAuthDto("test@email.com", "123456"))))
+                        .content(mapper.writeValueAsString(new EmailVerificationDto("test@email.com", "123456"))))
                 .andExpect(status().isBadRequest());
     }
 }

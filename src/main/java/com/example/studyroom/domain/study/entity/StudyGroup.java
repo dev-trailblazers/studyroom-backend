@@ -1,4 +1,4 @@
-package com.example.studyroom.domain.study;
+package com.example.studyroom.domain.study.entity;
 
 import com.example.studyroom.domain.AuditingField;
 import jakarta.persistence.*;

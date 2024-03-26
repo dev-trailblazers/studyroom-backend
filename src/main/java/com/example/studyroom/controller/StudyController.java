@@ -1,6 +1,5 @@
 package com.example.studyroom.controller;
 
-import com.example.studyroom.domain.study.StudyGroup;
 import com.example.studyroom.domain.study.dto.RequestStudyGroupDto;
 import com.example.studyroom.domain.study.dto.StudyGroupDto;
 import com.example.studyroom.security.CustomUserDetails;
@@ -27,5 +26,17 @@ public class StudyController {
     @PostMapping("/recruitment/{studyId}")
     public void studyRecruit(@PathVariable Long studyId, @AuthenticationPrincipal CustomUserDetails user){
         studyService.recruitStudy(studyId, user);
+    }
+
+    @PostMapping("/application/{studyId}")
+    public void studyApplication(@PathVariable Long studyId, @AuthenticationPrincipal CustomUserDetails user){
+        studyService.applyForStudy(studyId, user);
+    }
+
+    @PostMapping("/approval/{applicationId}")
+    public void studyApproval(@PathVariable Long applicationId,
+                              @RequestParam boolean status,
+                              @AuthenticationPrincipal CustomUserDetails user){
+        studyService.approvalForStudyApplication(applicationId, user, status);
     }
 }

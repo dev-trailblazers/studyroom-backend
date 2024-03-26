@@ -13,7 +13,7 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
       dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
     open-in-view: false

@@ -1,6 +1,7 @@
-package com.example.studyroom.domain.study;
+package com.example.studyroom.domain.study.entity;
 
 import com.example.studyroom.domain.AuditingField;
+import com.example.studyroom.domain.study.ParticipantRole;
 import com.example.studyroom.domain.user.Member;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -21,7 +22,7 @@ public class Participant extends AuditingField {
     private StudyGroup studyGroup;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 10, nullable = false)
+    @Column(columnDefinition = "varchar(10) not null default 'ANY'")
     private ParticipantRole role;
 
 

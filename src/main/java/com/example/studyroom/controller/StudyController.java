@@ -32,4 +32,11 @@ public class StudyController {
     public void studyApplication(@PathVariable Long studyId, @AuthenticationPrincipal CustomUserDetails user){
         studyService.applyForStudy(studyId, user);
     }
+
+    @PostMapping("/approval/{applicationId}")
+    public void studyApproval(@PathVariable Long applicationId,
+                              @RequestParam boolean status,
+                              @AuthenticationPrincipal CustomUserDetails user){
+        studyService.approvalForStudyApplication(applicationId, user, status);
+    }
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
@@ -22,6 +23,7 @@ public class StudyApplication extends AuditingField {
     @ManyToOne(fetch = FetchType.LAZY)
     private StudyGroup studyGroup;
 
+    @Setter
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(10) not null default '대기'")
     private ApplicationStatus status;

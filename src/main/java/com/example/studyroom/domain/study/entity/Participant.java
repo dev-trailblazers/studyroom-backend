@@ -22,7 +22,7 @@ public class Participant extends AuditingField {
     private StudyGroup studyGroup;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 10, nullable = false)
+    @Column(columnDefinition = "varchar(10) not null default 'ANY'")
     private ParticipantRole role;
 
 

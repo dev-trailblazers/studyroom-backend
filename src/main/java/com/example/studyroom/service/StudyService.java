@@ -40,7 +40,7 @@ public class StudyService {
     }
 
     public void recruitStudy(Long studyId, CustomUserDetails user) {
-        Participant participant = participationRepository.findByMember_Id(user.getId());
+        Participant participant = participationRepository.findByStudyGroup_IdAndMember_Id(studyId, user.getId());
         if(participant.getRole() == ParticipantRole.LEADER){
             StudyGroup studyGroup = studyGroupRepository.findById(studyId)
                     .orElseThrow(() -> new IllegalArgumentException());

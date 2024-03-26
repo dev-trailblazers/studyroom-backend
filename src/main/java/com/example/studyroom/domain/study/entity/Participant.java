@@ -1,6 +1,7 @@
-package com.example.studyroom.domain.study;
+package com.example.studyroom.domain.study.entity;
 
 import com.example.studyroom.domain.AuditingField;
+import com.example.studyroom.domain.study.ParticipantRole;
 import com.example.studyroom.domain.user.Member;
 import jakarta.persistence.*;
 import lombok.Builder;

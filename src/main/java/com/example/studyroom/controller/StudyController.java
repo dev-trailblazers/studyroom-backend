@@ -1,6 +1,5 @@
 package com.example.studyroom.controller;
 
-import com.example.studyroom.domain.study.StudyGroup;
 import com.example.studyroom.domain.study.dto.RequestStudyGroupDto;
 import com.example.studyroom.domain.study.dto.StudyGroupDto;
 import com.example.studyroom.security.CustomUserDetails;

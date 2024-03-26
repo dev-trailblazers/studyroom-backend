@@ -1,6 +1,6 @@
 package com.example.studyroom.domain.study.dto;
 
-import com.example.studyroom.domain.study.StudyGroup;
+import com.example.studyroom.domain.study.entity.StudyGroup;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

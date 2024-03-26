@@ -1,8 +1,8 @@
 package com.example.studyroom.service;
 
-import com.example.studyroom.domain.study.Participant;
+import com.example.studyroom.domain.study.entity.Participant;
 import com.example.studyroom.domain.study.ParticipantRole;
-import com.example.studyroom.domain.study.StudyGroup;
+import com.example.studyroom.domain.study.entity.StudyGroup;
 import com.example.studyroom.domain.study.dto.RequestStudyGroupDto;
 import com.example.studyroom.domain.study.dto.StudyGroupDto;
 import com.example.studyroom.domain.user.Member;

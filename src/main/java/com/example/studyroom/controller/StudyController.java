@@ -27,4 +27,9 @@ public class StudyController {
     public void studyRecruit(@PathVariable Long studyId, @AuthenticationPrincipal CustomUserDetails user){
         studyService.recruitStudy(studyId, user);
     }
+
+    @PostMapping("/application/{studyId}")
+    public void studyApplication(@PathVariable Long studyId, @AuthenticationPrincipal CustomUserDetails user){
+        studyService.applyForStudy(studyId, user);
+    }
 }

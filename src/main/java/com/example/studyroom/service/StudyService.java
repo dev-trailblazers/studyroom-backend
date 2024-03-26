@@ -2,6 +2,7 @@ package com.example.studyroom.service;
 
 import com.example.studyroom.domain.study.entity.Participant;
 import com.example.studyroom.domain.study.ParticipantRole;
+import com.example.studyroom.domain.study.entity.StudyApplication;
 import com.example.studyroom.domain.study.entity.StudyGroup;
 import com.example.studyroom.domain.study.dto.RequestStudyGroupDto;
 import com.example.studyroom.domain.study.dto.StudyGroupDto;
@@ -14,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 
 @RequiredArgsConstructor
 @Transactional
@@ -23,7 +26,7 @@ public class StudyService {
     private final ParticipationRepository participationRepository;
     private final StudyApplicationRepository studyApplicationRepository;
 
-    public StudyGroupDto createStudyGroup(RequestStudyGroupDto dto, Long memberId){
+    public StudyGroupDto createStudyGroup(RequestStudyGroupDto dto, Long memberId) {
         StudyGroup studyGroup = studyGroupRepository.save(RequestStudyGroupDto.toEntity(dto));
 
         Participant participant = Participant.builder()
@@ -41,10 +44,21 @@ public class StudyService {
 
     public void recruitStudy(Long studyId, CustomUserDetails user) {
         Participant participant = participationRepository.findByStudyGroup_IdAndMember_Id(studyId, user.getId());
-        if(participant.getRole() == ParticipantRole.LEADER){
+        if (participant.getRole() == ParticipantRole.LEADER) {
             StudyGroup studyGroup = studyGroupRepository.findById(studyId)
                     .orElseThrow(() -> new IllegalArgumentException());
             studyGroup.setRecruit(true);
         }
+    }
+
+    public void applyForStudy(Long studyId, CustomUserDetails user) {
+        StudyGroup studyGroup = studyGroupRepository.findById(studyId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 스터디입니다."));
+
+        StudyApplication studyApplication = StudyApplication.builder()
+                .member(user.getMember())
+                .studyGroup(studyGroup)
+                .build();
+        studyApplicationRepository.save(studyApplication);
     }
 }
